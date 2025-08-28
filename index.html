@@ -366,110 +366,9 @@
             border-bottom: none;
         }
 
-        /* Progress Bar */
-        .progress-bar {
-            width: 100%;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 3px;
-            margin: 20px 0;
-            overflow: hidden;
-        }
+        /* Progress Bar - 삭제된 스타일 */
 
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(45deg, #27ae60, #2ecc71);
-            width: 20%;
-            border-radius: 3px;
-            transition: width 0.5s ease;
-        }
-
-        /* Timeline Styles */
-        .timeline-container {
-            overflow-x: auto;
-            margin: 20px 0;
-        }
-
-        .timeline-header,
-        .timeline-row {
-            display: grid;
-            grid-template-columns: 80px repeat(5, 1fr);
-            gap: 2px;
-            min-width: 600px;
-        }
-
-        .timeline-header {
-            background: #667eea;
-            color: white;
-            font-weight: bold;
-            border-radius: 10px 10px 0 0;
-        }
-
-        .time-column,
-        .day-column,
-        .time-cell,
-        .schedule-cell {
-            padding: 12px 8px;
-            text-align: center;
-            font-size: 0.9rem;
-        }
-
-        .schedule-cell {
-            background: #f8f9fa;
-            border-radius: 5px;
-            font-size: 0.85rem;
-            min-height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .schedule-cell.empty {
-            background: #ffffff;
-        }
-
-        .schedule-cell.departure { background: linear-gradient(135deg, #ff6b6b, #ee5a24); color: white; }
-        .schedule-cell.arrival { background: linear-gradient(135deg, #74b9ff, #0984e3); color: white; }
-        .schedule-cell.activity { background: linear-gradient(135deg, #a29bfe, #6c5ce7); color: white; }
-        .schedule-cell.usj { background: linear-gradient(135deg, #fd79a8, #e84393); color: white; }
-        .schedule-cell.shopping { background: linear-gradient(135deg, #fdcb6e, #e17055); color: white; }
-        .schedule-cell.food { background: linear-gradient(135deg, #55a3ff, #003d82); color: white; }
-        .schedule-cell.rest { background: linear-gradient(135deg, #81ecec, #00b894); color: white; }
-
-        .timeline-legend {
-            margin-top: 20px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-        }
-
-        .legend-items {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
-        }
-
-        .legend-color {
-            width: 20px;
-            height: 15px;
-            border-radius: 3px;
-        }
-
-        .legend-color.departure { background: linear-gradient(135deg, #ff6b6b, #ee5a24); }
-        .legend-color.arrival { background: linear-gradient(135deg, #74b9ff, #0984e3); }
-        .legend-color.activity { background: linear-gradient(135deg, #a29bfe, #6c5ce7); }
-        .legend-color.usj { background: linear-gradient(135deg, #fd79a8, #e84393); }
-        .legend-color.shopping { background: linear-gradient(135deg, #fdcb6e, #e17055); }
-        .legend-color.food { background: linear-gradient(135deg, #55a3ff, #003d82); }
-        .legend-color.rest { background: linear-gradient(135deg, #81ecec, #00b894); }
+        /* Timeline Styles - 삭제된 스타일 */
 
         /* Responsive Design */
         @media (max-width: 768px) {
@@ -537,7 +436,7 @@
         </div>
 
         <div class="day-tabs">
-            <button class="day-tab" onclick="showDay(1)">1일차 (10/01)</button>
+            <button class="day-tab active" onclick="showDay(1)">1일차 (10/01)</button>
             <button class="day-tab" onclick="showDay(2)">2일차 (10/02)</button>
             <button class="day-tab" onclick="showDay(3)">3일차 (10/03)</button>
             <button class="day-tab" onclick="showDay(4)">4일차 (10/04)</button>
@@ -545,7 +444,7 @@
         </div>
 
         <!-- 1일차 내용 -->
-        <div class="day-content" id="day1">
+        <div class="day-content active" id="day1">
             <div class="day-header">
                 <div class="day-title">🛫 1일차 - 출발 및 도착</div>
                 <div class="day-date">2025년 10월 1일 (수)</div>
@@ -1427,29 +1326,14 @@
     </div>
 
     <script>
-        function showDay(dayIdentifier) {
+        function showDay(dayNumber) {
             // 모든 탭과 컨텐츠 비활성화
             document.querySelectorAll('.day-tab').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.day-content').forEach(content => content.classList.remove('active'));
             
-            if (dayIdentifier === 'timeline') {
-                // 타임라인 탭 활성화
-                document.querySelectorAll('.day-tab')[0].classList.add('active');
-                document.getElementById('timeline').classList.add('active');
-                
-                // 진행률 업데이트 (타임라인은 0%)
-                const progressFill = document.getElementById('progressFill');
-                progressFill.style.width = '0%';
-            } else {
-                // 해당 일차 탭과 컨텐츠 활성화
-                document.querySelectorAll('.day-tab')[dayIdentifier].classList.add('active');
-                document.getElementById(`day${dayIdentifier}`).classList.add('active');
-                
-                // 진행률 업데이트
-                const progressFill = document.getElementById('progressFill');
-                const progress = (dayIdentifier / 5) * 100;
-                progressFill.style.width = `${progress}%`;
-            }
+            // 선택된 일차 탭과 컨텐츠 활성화
+            document.querySelector(`.day-tab:nth-child(${dayNumber})`).classList.add('active');
+            document.getElementById(`day${dayNumber}`).classList.add('active');
         }
 
         // 현재 시간 체크하여 현재 일정 하이라이트
