@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>오사카 여행 가이드 | 4박5일 2025년 10월</title>
     <style>
+        /* Reset and Base Styles */
         * {
             margin: 0;
             padding: 0;
@@ -25,6 +26,7 @@
             padding: 20px;
         }
 
+        /* Header Section */
         .header {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -56,6 +58,7 @@
             justify-content: center;
             gap: 30px;
             margin-bottom: 20px;
+            flex-wrap: wrap;
         }
 
         .overview-item {
@@ -68,6 +71,7 @@
             box-shadow: 0 10px 20px rgba(238, 90, 36, 0.3);
         }
 
+        /* Day Navigation */
         .day-tabs {
             display: flex;
             justify-content: center;
@@ -99,6 +103,7 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
+        /* Content Sections */
         .day-content {
             display: none;
         }
@@ -129,13 +134,33 @@
             font-weight: bold;
         }
 
-        .schedule-container {
+        /* Schedule Components */
+        .schedule-container,
+        .links-section,
+        .tips-section {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 30px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 30px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 2px;
         }
 
         .schedule-item {
@@ -145,7 +170,7 @@
             margin-bottom: 20px;
             border-left: 5px solid #667eea;
             transition: all 0.3s ease;
-            position: relative;
+            cursor: pointer;
         }
 
         .schedule-item:hover {
@@ -211,6 +236,7 @@
             transform: translateY(-1px);
         }
 
+        /* Special Info Boxes */
         .flight-info {
             background: linear-gradient(135deg, #74b9ff, #0984e3);
             color: white;
@@ -231,31 +257,16 @@
             border-bottom: none;
         }
 
-        .links-section {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .section-title {
-            font-size: 1.8rem;
-            color: #2c3e50;
+        .weather-widget {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
             margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
-        .section-title::before {
-            content: '';
-            width: 4px;
-            height: 30px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border-radius: 2px;
-        }
-
+        /* Links Grid */
         .links-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -302,15 +313,7 @@
             font-size: 0.9rem;
         }
 
-        .tips-section {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
-        }
-
+        /* Tips Section */
         .tips-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -342,6 +345,7 @@
             font-size: 0.95rem;
         }
 
+        /* Emergency Contact */
         .emergency-contact {
             background: linear-gradient(135deg, #fd79a8, #e84393);
             color: white;
@@ -362,11 +366,113 @@
             border-bottom: none;
         }
 
+        /* Progress Bar */
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            width: 20%;
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+
+        /* Timeline Styles */
+        .timeline-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        .timeline-header,
+        .timeline-row {
+            display: grid;
+            grid-template-columns: 80px repeat(5, 1fr);
+            gap: 2px;
+            min-width: 600px;
+        }
+
+        .timeline-header {
+            background: #667eea;
+            color: white;
+            font-weight: bold;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .time-column,
+        .day-column,
+        .time-cell,
+        .schedule-cell {
+            padding: 12px 8px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .schedule-cell {
+            background: #f8f9fa;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .schedule-cell.empty {
+            background: #ffffff;
+        }
+
+        .schedule-cell.departure { background: linear-gradient(135deg, #ff6b6b, #ee5a24); color: white; }
+        .schedule-cell.arrival { background: linear-gradient(135deg, #74b9ff, #0984e3); color: white; }
+        .schedule-cell.activity { background: linear-gradient(135deg, #a29bfe, #6c5ce7); color: white; }
+        .schedule-cell.usj { background: linear-gradient(135deg, #fd79a8, #e84393); color: white; }
+        .schedule-cell.shopping { background: linear-gradient(135deg, #fdcb6e, #e17055); color: white; }
+        .schedule-cell.food { background: linear-gradient(135deg, #55a3ff, #003d82); color: white; }
+        .schedule-cell.rest { background: linear-gradient(135deg, #81ecec, #00b894); color: white; }
+
+        .timeline-legend {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+        }
+
+        .legend-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 15px;
+            border-radius: 3px;
+        }
+
+        .legend-color.departure { background: linear-gradient(135deg, #ff6b6b, #ee5a24); }
+        .legend-color.arrival { background: linear-gradient(135deg, #74b9ff, #0984e3); }
+        .legend-color.activity { background: linear-gradient(135deg, #a29bfe, #6c5ce7); }
+        .legend-color.usj { background: linear-gradient(135deg, #fd79a8, #e84393); }
+        .legend-color.shopping { background: linear-gradient(135deg, #fdcb6e, #e17055); }
+        .legend-color.food { background: linear-gradient(135deg, #55a3ff, #003d82); }
+        .legend-color.rest { background: linear-gradient(135deg, #81ecec, #00b894); }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .content-grid {
-                grid-template-columns: 1fr;
-            }
-            
             .header h1 {
                 font-size: 2.2rem;
             }
@@ -375,7 +481,10 @@
                 padding: 15px;
             }
             
-            .header, .schedule-card, .links-card, .tips-section {
+            .header,
+            .schedule-container,
+            .links-section,
+            .tips-section {
                 padding: 20px;
             }
 
@@ -393,42 +502,25 @@
             .links-grid {
                 grid-template-columns: 1fr;
             }
-            
-            .schedule-container, .links-section, .tips-section {
-                padding: 20px;
-            }
 
             .flight-detail {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 5px;
             }
-        }
 
-        .weather-widget {
-            background: linear-gradient(135deg, #74b9ff, #0984e3);
-            color: white;
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
 
-        .progress-bar {
-            width: 100%;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 3px;
-            margin: 20px 0;
-            overflow: hidden;
-        }
+            .timeline-header,
+            .timeline-row {
+                grid-template-columns: 60px repeat(5, 100px);
+            }
 
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(45deg, #27ae60, #2ecc71);
-            width: 20%;
-            border-radius: 3px;
-            transition: width 0.5s ease;
+            .legend-items {
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -442,9 +534,10 @@
                 <div class="overview-item">🏨 4박 5일</div>
                 <div class="overview-item">✈️ 인천 ↔ 간사이</div>
             </div>
+        </div>
 
         <!-- 타임라인 뷰 -->
-        <div class="day-content" id="timeline">
+        <div class="day-content active" id="timeline">
             <div class="day-header">
                 <div class="day-title">📅 전체 일정 타임라인</div>
                 <div class="day-date">2025년 10월 1일 - 10월 5일 (4박 5일)</div>
@@ -526,7 +619,7 @@
                         <div class="time-cell">11:00</div>
                         <div class="schedule-cell departure">🍽️ 점심 식사</div>
                         <div class="schedule-cell activity">🍽️ 간단한 식사</div>
-                        <div class="schedule-cell activity">🐅 덴노지동물원</div>
+                        <div class="schedule-cell activity">🅰 덴노지동물원</div>
                         <div class="schedule-cell activity">🚆 공항호텔로 이동</div>
                         <div class="schedule-cell arrival">🛬 인천 도착 & 🚗 발렛파킹</div>
                     </div>
@@ -535,7 +628,7 @@
                     <div class="timeline-row">
                         <div class="time-cell">12:00</div>
                         <div class="schedule-cell empty"></div>
-                        <div class="schedule-cell usj">🎢 유니버셜 스튜디오 재팬</div>
+                        <div class="schedule-cell usj">🎢 유니버설 스튜디오 재팬</div>
                         <div class="schedule-cell activity">🗼 신세카이 & 점심</div>
                         <div class="schedule-cell activity">🛍️ 쇼핑 & 점심</div>
                         <div class="schedule-cell arrival">🏠 집 도착</div>
@@ -545,7 +638,7 @@
                     <div class="timeline-row">
                         <div class="time-cell">13:00</div>
                         <div class="schedule-cell empty"></div>
-                        <div class="schedule-cell usj">🎢 유니버셜 스튜디오 재팬</div>
+                        <div class="schedule-cell usj">🎢 유니버설 스튜디오 재팬</div>
                         <div class="schedule-cell activity">🚕 호텔 복귀</div>
                         <div class="schedule-cell activity">🛍️ 쇼핑 & 점심</div>
                         <div class="schedule-cell empty"></div>
@@ -555,7 +648,7 @@
                     <div class="timeline-row">
                         <div class="time-cell">14:00</div>
                         <div class="schedule-cell departure">🚗 공항 이동</div>
-                        <div class="schedule-cell usj">🎢 유니버셜 스튜디오 재팬</div>
+                        <div class="schedule-cell usj">🎢 유니버설 스튜디오 재팬</div>
                         <div class="schedule-cell rest">💤 호텔 휴식</div>
                         <div class="schedule-cell activity">🛍️ 쇼핑 & 점심</div>
                         <div class="schedule-cell empty"></div>
@@ -605,9 +698,9 @@
                     <div class="timeline-row">
                         <div class="time-cell">19:00</div>
                         <div class="schedule-cell departure">✈️ KE721 출발</div>
-                        <div class="schedule-cell food">🥩 야끼니꾸</div>
+                        <div class="schedule-cell food">🥩 야라니쿠</div>
                         <div class="schedule-cell rest">🏨 호텔 휴식</div>
-                        <div class="schedule-cell food">🍱 저녁 식사</div>
+                        <div class="schedule-cell food">🱟 저녁 식사</div>
                         <div class="schedule-cell empty"></div>
                     </div>
                     
@@ -615,7 +708,7 @@
                     <div class="timeline-row">
                         <div class="time-cell">20:00</div>
                         <div class="schedule-cell departure">✈️ 비행 중</div>
-                        <div class="schedule-cell food">🥩 야끼니꾸</div>
+                        <div class="schedule-cell food">🥩 야라니쿠</div>
                         <div class="schedule-cell rest">🏨 호텔 휴식</div>
                         <div class="schedule-cell rest">💤 일찍 취침</div>
                         <div class="schedule-cell empty"></div>
@@ -692,7 +785,8 @@
         </div>
 
         <div class="day-tabs">
-            <button class="day-tab active" onclick="showDay(1)">1일차 (10/01)</button>
+            <button class="day-tab" onclick="showDay('timeline')">타임라인</button>
+            <button class="day-tab" onclick="showDay(1)">1일차 (10/01)</button>
             <button class="day-tab" onclick="showDay(2)">2일차 (10/02)</button>
             <button class="day-tab" onclick="showDay(3)">3일차 (10/03)</button>
             <button class="day-tab" onclick="showDay(4)">4일차 (10/04)</button>
@@ -700,7 +794,7 @@
         </div>
 
         <!-- 1일차 내용 -->
-        <div class="day-content active" id="day1">
+        <div class="day-content" id="day1">
             <div class="day-header">
                 <div class="day-title">🛫 1일차 - 출발 및 도착</div>
                 <div class="day-date">2025년 10월 1일 (수)</div>
@@ -724,7 +818,7 @@
                     <div class="schedule-activity">🚗 공항 이동</div>
                     <div class="schedule-details">
                         <div class="schedule-note">
-                            💊 차량 탑승 30분전 아이들에게 멀미약을 먹입니다.
+                            💊 차량 탑승 30분 전 아이들에게 멀미약을 먹입니다.
                         </div>
                         <div class="schedule-note">
                             🅿️ 인천공항 제2터미널로 갑니다.
@@ -840,7 +934,7 @@
         <!-- 2일차 내용 -->
         <div class="day-content" id="day2">
             <div class="day-header">
-                <div class="day-title">🎢 2일차 - 유니버셜 스튜디오 재팬</div>
+                <div class="day-title">🎢 2일차 - 유니버설 스튜디오 재팬</div>
                 <div class="day-date">2025년 10월 2일 (목)</div>
             </div>
 
@@ -855,7 +949,7 @@
                             🎢 USJ에 가는 날입니다. 활동하기 편한 옷을 입습니다.
                         </div>
                         <div class="schedule-note">
-                            📱 USJ 어플리케이션을 내려받고 티켓을 등록합니다.
+                            📱 USJ 애플리케이션을 내려받고 티켓을 등록합니다.
                         </div>
                         <a href="https://www.klook.com/bookings/?spm=Home.TopNavigation.Booking&clickId=c0123119e3" class="schedule-link" target="_blank">
                             🎫 KLOOK 티켓 예매 확인 (네이버 로그인)
@@ -885,7 +979,7 @@
 
                 <div class="schedule-item">
                     <div class="schedule-time">11:30 ~ 18:00</div>
-                    <div class="schedule-activity">🎠 유니버셜 스튜디오 재팬</div>
+                    <div class="schedule-activity">🎠 유니버설 스튜디오 재팬</div>
                     <div class="schedule-details">
                         <div class="flight-info" style="background: linear-gradient(135deg, #ff6b6b, #ee5a24);">
                             <h4>🎫 익스프레스 티켓 정보</h4>
@@ -902,7 +996,7 @@
                                 <span>16:30-17:00</span>
                             </div>
                             <div class="flight-detail">
-                                <span>동키콩의 크레이지 트램카</span>
+                                <span>동키콩의 크레이지 트랙카</span>
                                 <span>17:00-17:30</span>
                             </div>
                         </div>
@@ -911,9 +1005,9 @@
                             <strong>🎯 포함된 어트랙션:</strong><br>
                             • 슈퍼 닌텐도 월드™ 에어리어 입장 확약권<br>
                             • 요시 어드벤처™ (시간대 지정)<br>
-                            • 동키콩의 크레이지 트램카 (시간대 지정)<br>
+                            • 동키콩의 크레이지 트랙카 (시간대 지정)<br>
                             • 미니언 메이헴<br>
-                            • 죠스™ 또는 쥬라기 공원 - 더 라이드™ (1가지 선택)
+                            • 쥬스™ 또는 쥬라기 공원 - 더 라이드™ (1가지 선택)
                         </div>
                         
                         <div class="schedule-note" style="background: rgba(255, 193, 7, 0.1); border-left-color: #ffc107;">
@@ -939,7 +1033,7 @@
                     <div class="schedule-activity">🍽️ 저녁 식사 및 휴식</div>
                     <div class="schedule-details">
                         <div class="schedule-note">
-                            🥩 야끼니꾸 추천
+                            🥩 야라니쿠 추천
                         </div>
                         <div class="schedule-note">
                             💪 체력이 남을 경우 난바 파크스 구경
@@ -955,7 +1049,7 @@
         <!-- 3일차 내용 -->
         <div class="day-content" id="day3">
             <div class="day-header">
-                <div class="day-title">🐅 3일차 - 동물원 & 난바 쇼핑</div>
+                <div class="day-title">🅰 3일차 - 동물원 & 난바 쇼핑</div>
                 <div class="day-date">2025년 10월 3일 (금)</div>
             </div>
 
@@ -967,7 +1061,7 @@
                     <div class="schedule-activity">🌅 기상 후 외출 준비</div>
                     <div class="schedule-details">
                         <div class="schedule-note">
-                            🐅 오전 덴노지동물원, 오후 난바 쇼핑을 하는 날입니다.
+                            🅰 오전 덴노지동물원, 오후 난바 쇼핑을 하는 날입니다.
                         </div>
                     </div>
                 </div>
@@ -979,7 +1073,7 @@
 
                 <div class="schedule-item">
                     <div class="schedule-time">10:15 ~ 11:30</div>
-                    <div class="schedule-activity">🐅 덴노지동물원</div>
+                    <div class="schedule-activity">🅰 덴노지동물원</div>
                     <div class="schedule-details">
                         <div class="flight-info" style="background: linear-gradient(135deg, #2ecc71, #27ae60);">
                             <h4>🎫 입장료 정보</h4>
@@ -1006,13 +1100,13 @@
                     <div class="schedule-activity">🗼 신세카이 관광 & 점심</div>
                     <div class="schedule-details">
                         <div class="schedule-note">
-                            🗼 볼거리: 쓰텐카쿠 타워 구경
+                            🗼 볼거리: 츠텐카쿠 타워 구경
                         </div>
                         <div class="schedule-note">
                             🍽️ 신세카이 지역 맛집에서 점심 식사
                         </div>
                         <a href="https://maps.app.goo.gl/pxr6dEbGtGgrkw9M6" class="schedule-link" target="_blank">
-                            🗼 쓰텐카쿠 위치 (Google Maps)
+                            🗼 츠텐카쿠 위치 (Google Maps)
                         </a>
                     </div>
                 </div>
@@ -1447,7 +1541,7 @@
                 </div>
 
                 <div class="link-item">
-                    <div class="link-title">쓰텐카쿠 타워</div>
+                    <div class="link-title">츠텐카쿠 타워</div>
                     <a href="https://www.tsutenkaku.co.jp/" class="link-url" target="_blank">www.tsutenkaku.co.jp</a>
                     <div class="link-description">신세카이 랜드마크, 전망대 정보</div>
                 </div>
@@ -1529,12 +1623,12 @@
                 </div>
 
                 <div class="tip-item">
-                    <div class="tip-title">🐅 동물원 팁</div>
+                    <div class="tip-title">🦁 동물원 팁</div>
                     <div class="tip-content">덴노지동물원은 아침 일찍 가면 동물들이 더 활발합니다</div>
                 </div>
 
                 <div class="tip-item">
-                    <div class="tip-title">🗼 쓰텐카쿠 타워</div>
+                    <div class="tip-title">🗼 츠텐카쿠 타워</div>
                     <div class="tip-content">신세카이의 상징적인 타워, 전망대에서 오사카 시내를 한눈에!</div>
                 </div>
 
@@ -1582,39 +1676,35 @@
     </div>
 
     <script>
-        function showDay(dayNumber) {
+        function showDay(dayIdentifier) {
             // 모든 탭과 컨텐츠 비활성화
             document.querySelectorAll('.day-tab').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.day-content').forEach(content => content.classList.remove('active'));
             
-            // 선택된 탭과 컨텐츠 활성화
-            document.querySelector(`.day-tab:nth-child(${dayNumber})`).classList.add('active');
-            document.getElementById(`day${dayNumber}`).classList.add('active');
-            
-            // 진행률 업데이트
-            const progressFill = document.getElementById('progressFill');
-            const progress = (dayNumber / 5) * 100;
-            progressFill.style.width = `${progress}%`;
+            if (dayIdentifier === 'timeline') {
+                // 타임라인 탭 활성화
+                document.querySelectorAll('.day-tab')[0].classList.add('active');
+                document.getElementById('timeline').classList.add('active');
+                
+                // 진행률 업데이트 (타임라인은 0%)
+                const progressFill = document.getElementById('progressFill');
+                progressFill.style.width = '0%';
+            } else {
+                // 해당 일차 탭과 컨텐츠 활성화
+                document.querySelectorAll('.day-tab')[dayIdentifier].classList.add('active');
+                document.getElementById(`day${dayIdentifier}`).classList.add('active');
+                
+                // 진행률 업데이트
+                const progressFill = document.getElementById('progressFill');
+                const progress = (dayIdentifier / 5) * 100;
+                progressFill.style.width = `${progress}%`;
+            }
         }
 
         // 현재 시간 체크하여 현재 일정 하이라이트
         document.addEventListener('DOMContentLoaded', function() {
-            const now = new Date();
-            const currentHour = now.getHours();
             const scheduleItems = document.querySelectorAll('.schedule-item');
             
-            // 1일차 일정만 체크 (다른 날짜는 일정 추가 후 구현)
-            if (now.toDateString() === new Date('2025-10-01').toDateString()) {
-                if (currentHour >= 11 && currentHour < 14) {
-                    scheduleItems[0].classList.add('current');
-                } else if (currentHour >= 14 && currentHour < 15) {
-                    scheduleItems[1].classList.add('current');
-                } else if (currentHour >= 15 && currentHour < 19) {
-                    scheduleItems[2].classList.add('current');
-                }
-                // 추가 시간대별 하이라이트...
-            }
-
             // 클릭 이벤트 추가
             scheduleItems.forEach(item => {
                 item.addEventListener('click', function() {
