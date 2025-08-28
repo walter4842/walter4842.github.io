@@ -363,14 +363,22 @@
         }
 
         @media (max-width: 768px) {
-            .container {
-                padding: 15px;
+            .content-grid {
+                grid-template-columns: 1fr;
             }
             
             .header h1 {
                 font-size: 2.2rem;
             }
             
+            .container {
+                padding: 15px;
+            }
+            
+            .header, .schedule-card, .links-card, .tips-section {
+                padding: 20px;
+            }
+
             .trip-overview {
                 flex-direction: column;
                 align-items: center;
